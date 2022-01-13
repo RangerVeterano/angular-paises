@@ -1,0 +1,25 @@
+<h2>Por País</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!--
+        Escuchamos el evento emitido por le hijo y llamanos a la funcion que queremos que gestione el evento
+        Mandamos nuestro termino por medio del $event
+        -->
+        <app-pais-input (onEnter)="buscar($event)" (onDebounce)="sugerencias($event)" placeholder="Buscar País..." ></app-pais-input>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="hayError;" class="alert alert-danger">
+    No se encontró nada con el término : {{termino}}
+</div>
+
+<div *ngIf="paises.length > 0" class="row">
+    <div class="col">
+        <!-- Mandamos nuestra varaible paises dentro de padre a nuestro componente hijo y lo llamamos paises para no cambiar nombres -->
+        <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    </div>
+</div>
