@@ -7,10 +7,22 @@
         Escuchamos el evento emitido por le hijo y llamanos a la funcion que queremos que gestione el evento
         Mandamos nuestro termino por medio del $event
         -->
-        <app-pais-input (onEnter)="buscar($event)" (onDebounce)="sugerencias($event)" placeholder="Buscar País..." ></app-pais-input>
+        <app-pais-input (onEnter)="buscar($event)" (onDebounce)="sugerencias($event)" placeholder="Buscar País...">
+        </app-pais-input>
     </div>
 </div>
-
+<ul *ngIf="mostrarSuegerencias" class="list-group">
+    <li *ngFor="let pais of paisesSugeridos" class="list-group-item list-group-item-action">
+        <a [routerLink]="['/pais',pais.alpha2Code]" class="nav-link">
+            {{pais.name}}
+        </a>
+    </li>
+    <li class="list-group-item list-group-item-action">
+        <a class="nav-link" (click)="buscar(termino)">
+            Buscar "{{termino}}"
+        </a>
+    </li>
+</ul>
 <hr>
 
 <div *ngIf="hayError;" class="alert alert-danger">
